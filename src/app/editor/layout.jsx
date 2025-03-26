@@ -1,4 +1,4 @@
-import Header from "../dashboard/_components/Header"
+import Header from "@/components/Header"
 
 export default function EditorLayout({ children }) {
   return (

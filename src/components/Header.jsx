@@ -1,15 +1,19 @@
 "use client"
 
-import { UserButton } from "@clerk/nextjs"
+import { UserButton, useAuth } from "@clerk/nextjs"
 import { Zap, Menu } from "lucide-react"
-import { ThemeToggle } from "@/components/theme-toggle"  // Fixed import path
+import { ThemeToggle } from "@/components/theme-toggle"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 const Header = () => {
+  const { isSignedIn } = useAuth()
+
   return (
     <header className="fixed top-0 left-0 right-0 h-16 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 z-50">
       <nav className="flex h-full items-center justify-between px-4 md:px-6">
         <div className="flex items-center gap-6">
-          <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-2">
             <div className="flex items-center gap-3">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-primary/80 shadow-lg">
                 <Zap className="h-4 w-4 text-primary-foreground" />
@@ -19,7 +23,7 @@ const Header = () => {
                 <span className="hidden text-muted-foreground sm:inline">AI</span>
               </span>
             </div>
-          </div>
+          </Link>
           
           <div className="hidden items-center gap-3 border-l border-muted pl-6 lg:flex">
             <div className="flex items-center gap-2">
@@ -37,14 +41,26 @@ const Header = () => {
         <div className="flex items-center gap-2">
           <ThemeToggle />
           <div className="h-4 w-px bg-border/50" /> {/* Divider */}
-          <UserButton 
-            afterSignOutUrl="/"
-            appearance={{
-              elements: {
-                avatarBox: "h-8 w-8"
-              }
-            }}
-          />
+          {isSignedIn ? (
+            <>
+              <Button variant="ghost" asChild>
+                <Link href="/dashboard">Dashboard</Link>
+              </Button>
+              <div className="h-4 w-px bg-border/50" />
+              <UserButton 
+                afterSignOutUrl="/"
+                appearance={{
+                  elements: {
+                    avatarBox: "h-8 w-8"
+                  }
+                }}
+              />
+            </>
+          ) : (
+            <Button variant="ghost" asChild>
+              <Link href="/sign-in">Login</Link>
+            </Button>
+          )}
         </div>
       </nav>
     </header>

@@ -1,7 +1,7 @@
 import { cookies } from "next/headers"
 import { SidebarProvider } from "@/components/ui/sidebar"
 import SideBar from "./_components/SideBar"
-import Header from "./_components/Header"
+import Header from "@/components/Header"
 
 const DashboardLayout = async ({ children }) => {
   return (

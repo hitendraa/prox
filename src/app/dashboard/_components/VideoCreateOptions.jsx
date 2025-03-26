@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button"
 import { useUser } from "@clerk/nextjs"
 import { Plus, Sparkles, VideoIcon } from "lucide-react"
 import { useRouter } from "next/navigation"
-import uuid4 from "uuid4"
+import { uuid4 } from "uuid4"
 import axios from "axios"
 
 function VideoCreateOptions() {

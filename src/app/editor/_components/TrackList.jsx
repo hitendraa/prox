@@ -16,9 +16,16 @@ const defaultFrame = {
 }
 
 const TrackList = () => {
-  const [frameList, setFrameList] = useState([defaultFrame])
+  const [frameList, setFrameList] = useState([])
   const [selectedFrame, setSelectedFrame] = useState(0)
   const {videoFrames, setVideoFrames} = useContext(VideoFramesContext)
+
+  // Initialize with default frame if no frames exist
+  useEffect(() => {
+    if (!frameList || frameList.length === 0) {
+      setFrameList([defaultFrame])
+    }
+  }, [])
 
   const addNewFrame = () => {
     setFrameList(prev => [...prev, defaultFrame])
@@ -44,6 +51,14 @@ const TrackList = () => {
       selectedFrame: selectedFrame
     })
   }, [frameList, selectedFrame])
+
+  useEffect(() => {
+    if (videoFrames && videoFrames.frameList && videoFrames.frameList.length > 0) {
+      setFrameList(videoFrames.frameList)
+    }
+  }, [videoFrames])
+
+  if (!frameList) return null;
 
   return (
     <div className="space-y-6">
