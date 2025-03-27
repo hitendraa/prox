@@ -27,7 +27,7 @@ function RemotionPlayer() {
 
 
   useEffect(() => {
-    if(videoFrames.selectedFrame) {
+    if(videoFrames?.selectedFrame !== undefined && videoFrames?.frameList) {
         let skipDuration = 0;
         for (let i = 0; i < videoFrames.selectedFrame; i++) {
             skipDuration = skipDuration + videoFrames.frameList[i].duration;
