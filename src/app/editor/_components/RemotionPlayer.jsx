@@ -82,7 +82,9 @@ function RemotionPlayer() {
               borderRadius: "0.75rem",
             }}
             inputProps={{
-                frameList: videoFrames.frameList
+                frameList: videoFrames.frameList,
+                audioTrack: videoFrames.audioTrack,
+                audioVolume: videoFrames.audioVolume
             }}
           />}
         </div>

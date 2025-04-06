@@ -1,7 +1,9 @@
-import { VideoIcon, Settings2, Film } from "lucide-react"
+import { VideoIcon, Settings2, Film, Music2 } from "lucide-react"
 import RemotionPlayer from "../_components/RemotionPlayer"
 import TrackList from "../_components/TrackList"
 import SaveVideo from "../_components/SaveVideo"
+import FrameConfig from "../_components/FrameConfig"
+import AudioSettings from "../_components/AudioSettings"
 
 function Editor() {
   return (
@@ -21,6 +23,15 @@ function Editor() {
               <RemotionPlayer />
             </div>
           </div>
+          
+          {/* Audio Settings Section */}
+          <div className="mt-8">
+            <div className="flex items-center gap-3 mb-4">
+              <Music2 className="w-5 h-5 text-primary" />
+              <h2 className="text-xl font-semibold tracking-tight">Background Music</h2>
+            </div>
+            <AudioSettings />
+          </div>
         </div>
 
         {/* Editing Tools Section */}
@@ -31,7 +42,7 @@ function Editor() {
           </div>
           <div className="flex-1 bg-card rounded-xl border p-6 shadow-lg backdrop-blur-sm">
             <div className="flex items-center justify-center h-full text-muted-foreground/80">
-              Tools Panel
+              <FrameConfig />
             </div>
           </div>
         </div>

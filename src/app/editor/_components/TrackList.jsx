@@ -10,9 +10,10 @@ import { VideoFramesContext } from "@/_context/VideoFramesContext"
 const defaultFrame = {
   image: '/placeholder.jpg',
   text: 'New Frame',
-  textColor: 'black',
+  textColor: '#ffffff',
   fontSize: 20,
-  duration: 2
+  duration: 2,
+  fontFamily: 'default'
 }
 
 const TrackList = () => {
@@ -45,18 +46,21 @@ const TrackList = () => {
       totalDuration = totalDuration + frame.duration
     })
 
-    setVideoFrames({
+    setVideoFrames(prev => ({
+      ...prev,
       totalDuration: totalDuration,
       frameList: frameList,
-      selectedFrame: selectedFrame
-    })
+      selectedFrame: selectedFrame,
+      audioTrack: prev?.audioTrack || 'none',
+      audioVolume: prev?.audioVolume ?? 1
+    }))
   }, [frameList, selectedFrame])
 
   useEffect(() => {
     if (videoFrames && videoFrames.frameList && videoFrames.frameList.length > 0) {
       setFrameList(videoFrames.frameList)
     }
-  }, [videoFrames])
+  }, [videoFrames?.frameList])
 
   if (!frameList) return null;
 

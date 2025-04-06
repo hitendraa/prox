@@ -17,8 +17,6 @@ function SaveVideo() {
       videoId && GetVideoData();
     }, [videoId])
 
-
-
     const saveVideo = async () => {
         if (!videoId || !videoFrames) {
             toast.error('Missing video data');
@@ -27,9 +25,15 @@ function SaveVideo() {
 
         setIsSaving(true);
         try {
+            const videoData = {
+                ...videoFrames,
+                audioTrack: videoFrames.audioTrack || 'none',
+                audioVolume: videoFrames.audioVolume ?? 1
+            };
+
             const { data } = await axios.put('/api/video', {
                 videoId,
-                videoData: videoFrames
+                videoData
             });
             if (data.result) toast.success('Video saved successfully');
         } catch (error) {

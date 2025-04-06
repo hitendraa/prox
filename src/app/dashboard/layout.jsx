@@ -11,9 +11,7 @@ const DashboardLayout = async ({ children }) => {
         <div className="flex pt-16">
           <SideBar />
           <main className="flex-1 overflow-y-auto">
-            <div className="container mx-auto p-6">
-              {children}
-            </div>
+            {children}
           </main>
         </div>
       </div>
