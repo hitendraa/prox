@@ -1,86 +1,98 @@
 export const AudioTracks = [
     {
-        id: 'educational',
+        id: 'educational-background',
         name: 'Educational Background',
-        src: '/educational-background-music.mp3',
-        duration: 180,
-        tags: ['education', 'background', 'calm', 'professional']
+        file: '/educational-background-music.mp3',
+        mood: ['educational', 'calm', 'professional'],
+        suitableFor: ['children', 'teenager', 'all'],
+        type: ['educational', 'tutorial', 'explainer']
     },
     {
         id: 'funky-motivating',
         name: 'Funky Motivating',
-        src: '/funky-motivating-energetic-intro-pleased-education-music.mp3',
-        duration: 160,
-        tags: ['energetic', 'fun', 'upbeat', 'education']
+        file: '/funky-motivating-energetic-intro-pleased-education-music.mp3',
+        mood: ['energetic', 'fun', 'motivating'],
+        suitableFor: ['children', 'teenager', 'young-adult'],
+        type: ['intro', 'motivation', 'education']
     },
     {
         id: 'inspiring-corporate',
         name: 'Inspiring Corporate',
-        src: '/inspiring-and-corporate.mp3',
-        duration: 200,
-        tags: ['corporate', 'professional', 'inspiring', 'business']
+        file: '/inspiring-and-corporate.mp3',
+        mood: ['inspiring', 'professional', 'corporate'],
+        suitableFor: ['young-adult', 'adult'],
+        type: ['business', 'corporate', 'professional']
     },
     {
         id: 'kindergarten',
         name: 'Kindergarten Music',
-        src: '/kindergarten-music-primary-school-education-children-background.mp3',
-        duration: 150,
-        tags: ['children', 'playful', 'education', 'happy']
+        file: '/kindergarten-music-primary-school-education-children-background.mp3',
+        mood: ['playful', 'cheerful', 'fun'],
+        suitableFor: ['children'],
+        type: ['education', 'children']
     },
     {
         id: 'learning-music',
-        name: 'Learning Theme',
-        src: '/learning-music-education-study-school-background-intro-theme.mp3',
-        duration: 170,
-        tags: ['education', 'study', 'school', 'calm']
+        name: 'Learning Music',
+        file: '/learning-music-education-study-school-background-intro-theme.mp3',
+        mood: ['focused', 'educational', 'calm'],
+        suitableFor: ['children', 'teenager', 'all'],
+        type: ['education', 'learning', 'study']
     },
     {
-        id: 'little-break',
+        id: 'lofi-break',
         name: 'Little Break LoFi',
-        src: '/little-break-lofi-beat.mp3',
-        duration: 140,
-        tags: ['lofi', 'relaxing', 'chill', 'beat']
+        file: '/little-break-lofi-beat.mp3',
+        mood: ['relaxed', 'chill', 'casual'],
+        suitableFor: ['teenager', 'young-adult'],
+        type: ['casual', 'background']
     },
     {
         id: 'lofi-background-1',
         name: 'LoFi Background 1',
-        src: '/lofi-background-music_1.mp3',
-        duration: 165,
-        tags: ['lofi', 'background', 'chill', 'relaxing']
+        file: '/lofi-background-music_1.mp3',
+        mood: ['relaxed', 'chill', 'focused'],
+        suitableFor: ['all'],
+        type: ['background', 'study']
     },
     {
-        id: 'lofi-background-2',
-        name: 'LoFi Background 2',
-        src: '/lofi-background-music.mp3',
-        duration: 155,
-        tags: ['lofi', 'background', 'chill', 'relaxing']
+        id: 'lofi-background',
+        name: 'LoFi Background',
+        file: '/lofi-background-music.mp3',
+        mood: ['relaxed', 'chill', 'focused'],
+        suitableFor: ['all'],
+        type: ['background', 'study']
     },
     {
-        id: 'motivational',
+        id: 'motivational-corporate',
         name: 'Motivational Corporate',
-        src: '/motivational-background-corporate-city.mp3',
-        duration: 190,
-        tags: ['motivational', 'corporate', 'uplifting', 'business']
+        file: '/motivational-background-corporate-city.mp3',
+        mood: ['motivational', 'professional', 'energetic'],
+        suitableFor: ['young-adult', 'adult'],
+        type: ['business', 'corporate', 'motivation']
     },
     {
         id: 'peaceful-piano',
         name: 'Peaceful Piano',
-        src: '/peaceful-piano-background-music.mp3',
-        duration: 175,
-        tags: ['piano', 'peaceful', 'calm', 'relaxing']
+        file: '/peaceful-piano-background-music.mp3',
+        mood: ['peaceful', 'calm', 'soothing'],
+        suitableFor: ['all'],
+        type: ['background', 'relaxation']
     },
     {
         id: 'presentation',
         name: 'Presentation',
-        src: '/presentation.mp3',
-        duration: 185,
-        tags: ['professional', 'corporate', 'presentation', 'business']
+        file: '/presentation.mp3',
+        mood: ['professional', 'corporate', 'confident'],
+        suitableFor: ['young-adult', 'adult'],
+        type: ['presentation', 'business']
     },
     {
-        id: 'yoga-music',
+        id: 'yoga-meditation',
         name: 'Yoga & Meditation',
-        src: '/yoga-music-meditation-relax-spa-massage-healing-background.mp3',
-        duration: 195,
-        tags: ['meditation', 'relaxing', 'healing', 'calm']
+        file: '/yoga-music-meditation-relax-spa-massage-healing-background.mp3',
+        mood: ['peaceful', 'calming', 'meditative'],
+        suitableFor: ['all'],
+        type: ['meditation', 'relaxation', 'wellness']
     }
 ];

@@ -30,7 +30,7 @@ const CreateButton = () => {
           <Button 
             variant="outline" 
             className="flex flex-col h-24 sm:h-32 items-center justify-center gap-2 hover:border-primary transition-colors"
-            onClick={() => window.location.href = '/dashboard/create/ai'}
+            onClick={() => window.location.href = '/create-ai-video'}
           >
             <Sparkles className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
             <span className="font-medium text-sm sm:text-base">Generate with AI</span>

@@ -1,4 +1,5 @@
 import { AbsoluteFill, Sequence, useVideoConfig, useCurrentFrame, Audio } from "remotion";
+import { useState, useEffect } from "react";
 import { AudioTracks } from "@/app/_data/AudioTracks";
 
 const getEasing = (type, t) => {
@@ -34,10 +35,11 @@ const getEasing = (type, t) => {
   }
 };
 
-function RemotionComposition({ frameList, audioTrack, audioVolume = 1 }) {
+function RemotionComposition({ frameList = [], audioTrack, audioVolume = 1 }) {
   let trackFrame = 0;
   const { width, height, fps } = useVideoConfig();
   const currentFrame = useCurrentFrame();
+  const [lastStartFrame, setLastStartFrame] = useState(0);
 
   const getBackgroundStyle = (background) => {
     if (!background) return { backgroundColor: "#000000" };
@@ -218,13 +220,13 @@ function RemotionComposition({ frameList, audioTrack, audioVolume = 1 }) {
   };
 
   const getAudioForFrame = (frame) => {
-    if (!frame.audioTrack) return null;
-    const audioTrack = AudioTracks.find(track => track.id === frame.audioTrack);
-    if (!audioTrack) return null;
+    if (!frame.audioTrack || frame.audioTrack === 'none') return null;
+    const track = AudioTracks.find(t => t.id === frame.audioTrack);
+    if (!track) return null;
 
     return (
       <Audio
-        src={audioTrack.src}
+        src={`/${track.file}`}
         volume={frame.audioVolume || 1}
       />
     );
@@ -232,13 +234,16 @@ function RemotionComposition({ frameList, audioTrack, audioVolume = 1 }) {
 
   const getGlobalAudio = () => {
     if (!audioTrack || audioTrack === "none") return null;
+    
     const track = AudioTracks.find(t => t.id === audioTrack);
     if (!track) return null;
-
+    
     return (
       <Audio
-        src={track.src}
+        src={track.file}
         volume={audioVolume}
+        startFrom={0}
+        endAt={99999}
       />
     );
   };

@@ -5,6 +5,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import RemotionComposition from "./RemotionComposition";
 import { useContext, useEffect, useRef, useState } from "react";
 import { VideoFramesContext } from "@/_context/VideoFramesContext";
+import { AudioTracks } from "@/app/_data/AudioTracks";
 
 const VIDEO_SIZES = {
   "16:9 (1920x1080)": { width: 1920, height: 1080 },
@@ -22,19 +23,25 @@ function RemotionPlayer() {
     setScreenSize(VIDEO_SIZES[value]);
   };
 
-  const {videoFrames, setVideoFrames} = useContext(VideoFramesContext);
+  const { videoFrames } = useContext(VideoFramesContext);
   const playerRef = useRef(null);
-
+  const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    if(videoFrames?.selectedFrame !== undefined && videoFrames?.frameList) {
-        let skipDuration = 0;
-        for (let i = 0; i < videoFrames.selectedFrame; i++) {
-            skipDuration = skipDuration + videoFrames.frameList[i].duration;
-        }
-        playerRef.current?.seekTo(skipDuration * 30);
+    if (videoFrames?.selectedFrame !== undefined && videoFrames?.frameList) {
+      let skipDuration = 0;
+      for (let i = 0; i < videoFrames.selectedFrame; i++) {
+        skipDuration = skipDuration + videoFrames.frameList[i].duration;
+      }
+      playerRef.current?.seekTo(skipDuration * 30);
     }
-  } ,[videoFrames?.selectedFrame]);
+  }, [videoFrames?.selectedFrame]);
+
+  if (!videoFrames?.frameList) {
+    return <div className="w-full h-full flex items-center justify-center">Loading...</div>;
+  }
+
+  const totalDuration = videoFrames.frameList.reduce((acc, frame) => acc + frame.duration, 0);
 
   return (
     <div className="relative w-full h-full">
@@ -45,8 +52,8 @@ function RemotionPlayer() {
           </SelectTrigger>
           <SelectContent className="min-w-[140px] bg-popover/95 backdrop-blur-md border-border">
             {Object.keys(VIDEO_SIZES).map((size) => (
-              <SelectItem 
-                key={size} 
+              <SelectItem
+                key={size}
                 value={size}
                 className="text-xs py-1.5 text-popover-foreground hover:bg-accent focus:bg-accent focus:text-accent-foreground"
               >
@@ -56,22 +63,19 @@ function RemotionPlayer() {
           </SelectContent>
         </Select>
       </div>
-      <div 
-        className="w-full h-full flex items-center justify-center"
-      >
-        <div 
-          style={{ 
+      <div className="w-full h-full flex items-center justify-center">
+        <div
+          style={{
             aspectRatio: `${screenSize.width}/${screenSize.height}`,
             height: screenSize.width > screenSize.height ? 'auto' : '100%',
             width: screenSize.width > screenSize.height ? '100%' : 'auto',
           }}
           className="relative"
         >
-            {videoFrames?.totalDuration &&
           <Player
             ref={playerRef}
             component={RemotionComposition}
-            durationInFrames={Number(videoFrames.totalDuration) * 30}
+            durationInFrames={Math.ceil(totalDuration * 30)}
             compositionWidth={screenSize.width}
             compositionHeight={screenSize.height}
             fps={30}
@@ -82,11 +86,17 @@ function RemotionPlayer() {
               borderRadius: "0.75rem",
             }}
             inputProps={{
-                frameList: videoFrames.frameList,
-                audioTrack: videoFrames.audioTrack,
-                audioVolume: videoFrames.audioVolume
+              frameList: videoFrames.frameList,
+              audioTrack: videoFrames.audioTrack || null,
+              audioVolume: videoFrames.audioVolume || 1
             }}
-          />}
+            autoPlay={playing}
+            loop
+            showVolumeControls
+            allowFullscreen
+            onPlay={() => setPlaying(true)}
+            onPause={() => setPlaying(false)}
+          />
         </div>
       </div>
     </div>
